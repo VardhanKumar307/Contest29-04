@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up</title>
+    <style>
+        body{
+            background-color: black;
+            color: aliceblue;
+        }
+        nav ul li {
+            float: right;
+            list-style: none;
+            margin: 20px;
+            color: aliceblue;
+        }
+        nav ul li a{
+            color: aliceblue;
+        }
+        section{
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+                <li style="float:left" ><a href="index.html">Header</a></li>
+				<li ><a href="index.html">Sign Up</a></li>
+				<li ><a href="profile.html">Profile</a></li>
+			</ul>
+		</nav>
+        <br><br>
+	</header>
+    <hr>
+	
+	<section>
+		<h2>Sign Up</h2>
+		<form id="signup-form">
+			<label for="fullname">Full Name:</label>
+			<input type="text" id="fullname" name="fullname" required><br><br>
+			
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required><br><br>
+			
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" required><br><br>
+			
+			<label for="confirm-password">Confirm Password:</label>
+			<input type="password" id="confirm-password" name="confirm-password" required><br><br>
+			
+			<button type="submit">Signup</button>
+		</form>
+	</section>
+	
+	<script>
+		var signupForm = document.querySelector('#signup-form');
+		
+		signupForm.addEventListener('submit', function(event) {
+			event.preventDefault();
+			
+			var fullname = document.querySelector('#fullname').value;
+			var email = document.querySelector('#email').value;
+			var password = document.querySelector('#password').value;
+			var confirmPassword = document.querySelector('#confirm-password').value;
+			
+			if (password !== confirmPassword) {
+				alert('Password and Confirm Password do not match');
+				return;
+			}
+			
+			var accessToken = '';
+			var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+			var charactersLength = characters.length;
+			for ( var i = 0; i < 16; i++ ) {
+				accessToken += characters.charAt(Math.floor(Math.random() * charactersLength));
+			}
+			
+			var user = {
+				fullname: fullname,
+				email: email,
+				password: password,
+				accessToken: accessToken
+			};
+			
+			localStorage.setItem('user', JSON.stringify(user));
+			
+			window.location.href = 'profile.html';
+		});
+	</script>
+	
+</body>
+</html>

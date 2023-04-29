@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile</title>
+    <style>
+        body{
+            background-color: black;
+            color: aliceblue;
+        }
+        nav ul li {
+            float: right;
+            list-style: none;
+            margin: 20px;
+            
+        }
+        nav ul li a{
+            color: aliceblue;
+        }
+        section{
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+                <li style="float:left" ><a href="index.html">Header</a></li>
+				<li><a href="index.html">Sign Up</a></li>
+				<li><a href="profile.html">Profile</a></li>
+			</ul>
+		</nav>
+        <br><br>
+	</header>
+	<hr>
+	<section>
+		<h2>Profile</h2>
+
+		<ul>
+			<li><strong>Full Name: </strong><span id="fullname"></span></li>
+			<li><strong>Email: </strong> <span id="email"></span></li>
+            <li><strong>Password:</strong> <span id="password"></span></li>
+			<li><strong>Access Token:</strong> <span id="accessToken"></span></li>
+		</ul>
+		<button id="logout">Log Out</button>
+	</section>
+	
+	<script>
+		var user = JSON.parse(localStorage.getItem('user'));
+		
+		document.querySelector('#fullname').textContent = user.fullname;
+		document.querySelector('#email').textContent = user.email;
+        document.querySelector('#password').textContent = user.password;
+		document.querySelector('#accessToken').textContent = user.accessToken;
+		
+		document.querySelector('#logout').addEventListener('click', function() {
+			localStorage.setItem('user', null);
+			location.reload();
+		});
+	</script>
+	
+</body>
+</html>
